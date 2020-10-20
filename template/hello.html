@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<title>欢迎</title>
+<style type="text/css">
+  body {
+    background-image:url(../image/background.jpg);
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-size: 100% 100%;
+  }
+  h1 {
+    width: 600px;
+	margin-left: -300px;
+	height: 200px;
+	margin-top: -100px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	font-size: 70px;
+	font-family: "楷体", "楷体_GB2312";
+	text-align: center;
+  }
+</style>
+</head>
+<body>
+<h1>欢迎XXX领导莅临参观!</h1>
+</body>
+</html>
+<script type="text/javascript"> 
+  function replace_url(){
+    alert('jump!')
+    window.location.replace("./broadcast.html")
+    //IntegralPointExecute();//在整点执行的函数，在每个整点都调用该函数
+    //setInterval("IntegralPointExecute()",60*60*1000);//一个小时执行一次，那么下一个整点，下下一个整点都会执行
+  }
+
+  var now = new Date();
+  var next = new Date();
+  next.setHours(now.getHours());
+  next.setMinutes(now.getMinutes());
+  next.setSeconds(now.getSeconds()+5);
+  setTimeout("replace_url()",next-now);
+</script>
