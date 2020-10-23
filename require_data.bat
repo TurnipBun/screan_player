@@ -1,0 +1,1 @@
+.\curl.exe https://www.cnss.com.cn/u/cms/www/indexJson/bdi_week.json > .\data\bdi_week.json

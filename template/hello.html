@@ -29,7 +29,6 @@
 </html>
 <script type="text/javascript"> 
   function replace_url(){
-    alert('jump!')
     window.location.replace("./broadcast.html")
     //IntegralPointExecute();//在整点执行的函数，在每个整点都调用该函数
     //setInterval("IntegralPointExecute()",60*60*1000);//一个小时执行一次，那么下一个整点，下下一个整点都会执行
@@ -40,5 +39,5 @@
   next.setHours(now.getHours());
   next.setMinutes(now.getMinutes());
   next.setSeconds(now.getSeconds()+5);
-  setTimeout("replace_url()",next-now);
+  //setTimeout("replace_url()",next-now);
 </script>

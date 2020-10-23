@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --kiosk "C:\Users\HC\Desktop\screen_player\template\broadcast.html"
