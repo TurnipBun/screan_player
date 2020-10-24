@@ -1,5 +1,5 @@
-import re,shutil,json
-			
+import re,shutil,json,os
+
 def read_news():
     with open("./data/news.txt", encoding="utf-8") as news:
         for line in news:
@@ -16,6 +16,7 @@ def read_bdi():
         return html_table
 		
 news = read_news()
+os.system(".\\curl.exe https://www.cnss.com.cn/u/cms/www/indexJson/bdi_week.json > .\\data\\bdi_week.json")
 bdi_table = read_bdi()
 with open("./template/broadcast.html",encoding="utf-8") as html, open("./template/temp.html", "w", encoding="utf-8") as temp:
     for line in html:

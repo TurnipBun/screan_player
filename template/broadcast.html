@@ -165,7 +165,7 @@
 			<tr>
 			  <td>
 				<h1>波罗的海干散货指数</h1>
-				<table class="table_bdi"><tr><th>日期</th><th>2020.10.16</th><th>2020.10.19</th><th>2020.10.20</th><th>2020.10.21</th><th>2020.10.22</th></tr><tr><th>指数</th><td>1477.0</td><td>1409.0</td><td>1350.0</td><td>1346.0</td><td>1401.0</td></tr><tr><th>涨跌</th><td>-84.0</td><td>-68.0</td><td>-59.0</td><td>-4.0</td><td>55.0</td></tr></table>
+				<table class="table_bdi"><tr><th>日期</th><th>2020.10.19</th><th>2020.10.20</th><th>2020.10.21</th><th>2020.10.22</th><th>2020.10.23</th></tr><tr><th>指数</th><td>1409.0</td><td>1350.0</td><td>1346.0</td><td>1401.0</td><td>1415.0</td></tr><tr><th>涨跌</th><td>-68.0</td><td>-59.0</td><td>-4.0</td><td>55.0</td><td>14.0</td></tr></table>
 			  </td>
 			</tr>
 		  </table>
@@ -198,7 +198,10 @@
 </body>
 </html>
 <script src="../script/jquery-1.10.2.mins.js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
+    /*
+	 * 翻页时钟
+	 */
     (function($){
 	jQuery.fn.flipCountDown = jQuery.fn.flipcountdown = function( _options ){
 		var default_options = {
@@ -388,7 +391,9 @@
 	$(function(){
 		$('#retroclockbox_lg').flipcountdown({size:'lg'});
 	})
-	
+	/*
+	 * 人民币汇率
+	 */
 	function loadRate() {
 		$.ajax({
 			url:"https://ali-waihui.showapi.com/waihui-list",
@@ -437,40 +442,6 @@
 	
 	loadRate();
 	
-	/*
-	function loadBdi() {
-		$.get("../json/bdi_week.json",function(data,status){
-		  alert("测试点");
-		});
-	$.ajax({
-			url:"https://www.cnss.com.cn/u/cms/www/indexJson/bdi_week.json?v="+(new Date()).getTime(),
-			dataType:'json',
-			method: 'get',
-			beforeSend: function(request) {
-			},
-			success:function(result) {
-				alert("测试点");
-			    var date_array = new Array(5);
-			    var index_array = new Array(5);
-			    $.each(result, function(index, item){
-						date_array[index] = item.date;
-						index_array[index] = item.index;
-					});
-				
-				var table_body = '<tr><th>'+date_array[0]+'</th><th>'+date_array[1]+'</th><th>'+date_array[2]+'</th><th>'+date_array[3]+'</th><th>'+date_array[4]+'</th></tr>';
-				table_body += '<tr><td>'+index_array[0]+'</td><td>'+index_array[1]+'</td><td>'+index_array[2]+'</td><td>'+index_array[3]+'</td><td>'+index_array[4]+'</td></tr>';
-				$("#table_bdi").html(table_body);
-			}
-		});
-	}
-	
-	loadBdi();*/
-	
-	
-	//function loadDollarIndex() {
-      //$("#dollar_index").attr('src', 'http://quote.cfi.cn/DrawPrice.aspx?stockid=14007&type=day&w=1000&h=300&dbs=&piclen=60&ct=big&date=&v=0&round=1057&script=macd');
-    //}
-	//loadDollarIndex();
 	
 	/*
 	 * 滚动效果
@@ -494,25 +465,6 @@
         }
     }
     var MyMar=setInterval(Marquee,20)
-	
-  /*
-   * canvas 时钟
-   */
-  var hourspan = document.getElementById("hour");
-  var minutespan = document.getElementById("minute");
-  var secondspan = document.getElementById("second");
-  
-  function timeActive(){
-    var date = new Date();
-    var hour = date.getHours();
-    var minute = date.getMinutes();
-    var second = date.getSeconds();
-	hourspan.innerText = hour;
-    minutespan.innerText = minute;
-    secondspan.innerText = second;
-  }
-  timeActive();//初始化画布
-  setInterval('timeActive()',1000);
 	
 	/*
 	 * 定时刷新页面,1小时
