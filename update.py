@@ -1,4 +1,6 @@
-import re,shutil,json,os
+# -*- coding:utf-8 -*-
+import re,shutil,json,os,urllib,sys,io
+from bs4 import BeautifulSoup
 
 def read_news():
     with open("./data/news.txt", encoding="utf-8") as news:
@@ -9,19 +11,25 @@ def read_news():
                 return re.sub(" ","&nbsp;",line)
 				
 def read_bdi():
-    with open("./data/bdi_week.json", encoding="utf-8") as bdi:
-        content = bdi.read()
-        obj = json.loads(content)
-        html_table = '<table class="table_bdi"><tr><th>日期</th><th>'+obj[0]["date"]+'</th><th>'+obj[1]["date"]+'</th><th>'+obj[2]["date"]+'</th><th>'+obj[3]["date"]+'</th><th>'+obj[4]["date"]+'</th></tr><tr><th>指数</th><td>'+obj[0]["index"]+'</td><td>'+obj[1]["index"]+'</td><td>'+obj[2]["index"]+'</td><td>'+obj[3]["index"]+'</td><td>'+obj[4]["index"]+'</td></tr><tr><th>涨跌</th><td>'+obj[0]["change_count"]+'</td><td>'+obj[1]["change_count"]+'</td><td>'+obj[2]["change_count"]+'</td><td>'+obj[3]["change_count"]+'</td><td>'+obj[4]["change_count"]+'</td></tr></table>'
-        return html_table
+    try:
+        content=urllib.request.urlopen("http://value500.com/BDI.asp")
+        soup = BeautifulSoup(content,features="html5lib")
+        unicode_result = str(soup.body.contents[1].contents[7].tbody.tr.contents[3].table.tbody.tr.td.contents[7].table.tbody)
+    except:
+        return ""
+    else:
+        return '<table class="table_bdi">'+unicode_result+'</table>'
 		
 news = read_news()
-os.system(".\\curl.exe https://www.cnss.com.cn/u/cms/www/indexJson/bdi_week.json > .\\data\\bdi_week.json")
+print(news)
 bdi_table = read_bdi()
+print(bdi_table)
 with open("./template/broadcast.html",encoding="utf-8") as html, open("./template/temp.html", "w", encoding="utf-8") as temp:
     for line in html:
-        line = re.sub('<td class="news">.*</td>', '<td class="news">' + news + '</td>', line)
-        line = re.sub('<table class="table_bdi">.*</table>', bdi_table, line)
+        if news != "":
+            line = re.sub('<td class="news">.*</td>', '<td class="news">' + news + '</td>', line)
+        if bdi_table != "":
+            line = re.sub('<table class="table_bdi">.*</table>', bdi_table, line)
         temp.write(line)
 		
 shutil.move("./template/temp.html", "./template/broadcast.html")
