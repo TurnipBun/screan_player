@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import re,shutil,json,os,urllib,sys,io
+import urllib.request
 from bs4 import BeautifulSoup
 
 def read_news():
@@ -18,7 +19,7 @@ def read_bdi():
     except:
         return ""
     else:
-        return '<table class="table_bdi">'+unicode_result+'</table>'
+        return '<table class="table_bdi">'+unicode_result.replace('\n','')+'</table>'
 		
 news = read_news()
 print(news)
