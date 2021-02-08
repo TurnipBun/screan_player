@@ -1,4 +1,4 @@
-# screan_player
+# screen_player
 大屏播放软件
 ## 分辨率 ##
 1920 X 1080
